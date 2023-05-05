@@ -2,6 +2,7 @@ package com.example.course.entities;
 
 
 import com.example.course.entities.enums.OrderStatus;
+import com.example.course.entities.pk.OrderItemPK;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
@@ -89,6 +90,14 @@ public class Order implements Serializable {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Double getTotal(){
+        double sum = 0.0;
+        for(OrderItem x : items){
+            sum += x.getSubtotal();
+        }
+        return sum;
     }
 
     @Override
